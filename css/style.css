@@ -1,0 +1,633 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+body, html {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+
+}
+
+
+
+.logo {
+    color: #6300B3;
+}
+
+.ml-1 {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+a:hover {
+    color: #6300B3;
+  }
+
+a:active {
+color: #6300B3;
+}
+
+.navbar-nav{
+    margin-left: auto;
+}
+
+.navbar-nav li{
+    padding-right: 30px;
+}
+
+.navbar-nav li .nav-link:hover{
+    color: #6300B3;
+}
+
+.btn {
+    color: #6300B3;
+    border: 2px solid #6300B3;
+    margin-left: 20px;
+}
+
+.btn:hover {
+    background-color: #6300B3;
+    color: #ffffff;
+}
+
+
+
+
+
+
+/* Content Page */
+#grad {
+    background-color: #E2CCF27A;
+}
+
+.content-img {
+    max-width: 100%; /* Ensure the image doesn't exceed its container width */
+    height: auto;    /* Maintain aspect ratio */
+    margin-right: 0; /* Reset any unintended margins */
+}
+
+.card {
+    margin-bottom: 20px;  /* Add custom spacing between cards */
+}
+
+.row {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.col-12{
+    margin-top: 30px;
+}
+
+/* End content page */
+
+
+
+
+
+/* Job Cards */
+.card{
+    background-color: #EFE2F8;
+}
+
+.btn-job{
+    margin-left: 0;
+}
+
+.view-all-text{
+    color: #6300B3;
+}
+.icons{
+    width: 100px;
+}
+
+
+
+
+/* Center the icons inside the container */
+.company-icons {
+    display: flex;                /* Use flexbox to arrange icons in a row */
+    justify-content: center;      /* Align the icons in the center */
+    gap: 150px;                    /* Space between the icons */
+    padding: 0;
+
+}
+
+/* Style each icon to make them larger with a fixed width and height */
+.company-icon img.icons {
+    width: 100px;       /* Set the width of the icons */
+    height: 100px;      /* Set the height to make them square */
+    object-fit: contain; /* Ensure the images scale proportionally */
+    transition: transform 0.3s ease-in-out; /* Smooth scaling on hover */
+}
+
+/* Hover effect on the icons */
+.company-icon:hover img.icons {
+    transform: scale(1.1);  /* Slight zoom on hover */
+}
+
+/* Responsive handling for smaller screens */
+@media (max-width: 768px) {
+    .company-icons {
+        flex-wrap: wrap;   /* Allow icons to wrap on smaller screens */
+        justify-content: center;
+    }
+
+    .company-icon img.icons {
+        width: 80px;       /* Adjust size for smaller screens */
+        height: 80px;      /* Maintain the aspect ratio with fixed height */
+    }
+}
+
+/* End Cards */
+
+
+
+
+
+
+
+/* Footer */
+
+.footer {
+    background-color: #E2CCF27A; /* Light background color */
+    padding: 40px 0;            /* Add padding for spacing */
+    margin-top: 50px;           /* Add top margin to create space above the footer */
+    width: 100%;                /* Make sure the footer takes full width */
+    position: relative;         /* Allow it to extend fully */
+}
+
+/* Container to center the content inside the footer */
+.footer .container {
+    max-width: 1140px;  /* Set a maximum width for the container */
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Style for the columns inside the footer */
+.footer .col {
+    margin-bottom: 20px;
+}
+
+/* Styling for footer text and links */
+.footer h6 {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #6300B3;
+}
+
+.footer .navbar-nav {
+    list-style: none;
+    padding-left: 0;
+}
+
+.footer .nav-item {
+    margin-bottom: 10px;
+}
+
+.footer .nav-link {
+    color: #555;         /* Dark text for better visibility */
+    text-decoration: none;
+}
+
+.footer .nav-link:hover {
+    color: #007bff;       /* Add color change on hover */
+}
+
+/* Styling for social media icons in footer */
+.footer .navbar-nav .nav-item img {
+    width: 30px;   /* Set a fixed width for the icons */
+    height: 30px;  /* Keep icons square */
+    margin-right: 10px; /* Add space between icons */
+}
+
+/* Optional: Style for the footer divider */
+.footer hr {
+    margin: 20px 0;
+    border-top: 1px solid #ccc; /* Light divider */
+}
+
+/* Media Query for responsiveness */
+@media (max-width: 768px) {
+    .footer .row {
+        text-align: center;    /* Center text on smaller screens */
+    }
+
+    .footer .col {
+        margin-bottom: 15px;
+    }
+
+    .footer .navbar-nav {
+        justify-content: center; /* Center navbar items on smaller screens */
+    }
+
+    .footer .navbar-nav .nav-item {
+        margin: 5px 15px;
+    }
+}
+
+ul {
+    list-style-type: none;  /* Removes default list bullets */
+    padding-left: 0;        /* Removes left padding */
+    margin-left: 0;         /* Removes left margin */
+}
+
+
+footer {
+    margin: 0;
+    padding: 0;
+}
+/* End Footer */
+
+
+/* login page */
+
+.form-control-sm {
+    width: 250px;
+}
+
+
+
+.btn-login {
+    display: inline-block;
+    font-size: 14px; /* Smaller text size */
+    padding: 10px 56px; /* Adjust padding for smaller button size */
+    text-align: center;
+    background-color: #6300B3;
+    color: #ffffff;
+    text-decoration: none; /* Remove underline */
+    border: none; /* Remove border */
+    cursor: pointer;
+    margin-top: 30px;
+  }
+
+.btn-login:hover {
+    background-color: #0056b3; /* Darker blue when hovering */
+  }
+
+.navbar-nav .nav-item img {
+    width: 34px; /* Set the width to a smaller size */
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* Register */
+
+.login-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .login-form {
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  }
+
+
+
+  /* SEARCH */
+  /* Style for the job search form */
+.job-search-form {
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Ensure the form elements are in a row */
+  .job-search-form .form-group {
+    margin-right: 10px;
+  }
+
+  /* Style for the input fields */
+  .job-search-form .form-control {
+    height: 40px;
+  }
+
+  /* Style for the search button */
+  .job-search-form button {
+    height: 40px;
+    padding: 0 15px;
+    font-size: 14px;
+    border-radius: 5px;
+  }
+
+  /* Ensure the form elements stay aligned horizontally */
+  .d-flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  .d-flex .form-group {
+    margin-bottom: 0;
+  }
+
+  .d-flex .form-group input {
+    width: 180px; /* Customize width if needed */
+  }
+
+  .d-flex .btn {
+    width: auto;
+  }
+
+  /* Optional: add a hover effect to the button */
+  .job-search-form button:hover {
+    background-color: #0056b3;
+    color: white;
+  }
+
+  .btn-search{
+    background-color: #6300B3;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px 5px;
+
+
+    padding: 10px;
+  }
+  .input-container {
+    position: relative;
+  }
+
+  .input-container .form-control {
+    padding-right: 30px; /* Space for the icon */
+  }
+
+  .input-container .input-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none; /* Ensures the icon doesn't interfere with text input */
+  }
+  /* End Search */
+
+
+  /* About */
+.about{
+    background-color: #EFE2F8;
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+
+
+
+
+/* Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4); /* Semi-transparent background */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Adjust width as needed */
+}
+
+.close {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    right: 10px;
+    top: 0;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+
+/* Job Search */
+
+.section-jobs{
+    margin-right: 100px;
+}
+.row-card {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap; /* Ensures cards wrap if needed */
+    justify-content: center; /* Optional: centers cards horizontally */
+    gap: 30px;
+}
+
+.job-card {
+    background-color: #f8f3fd;
+    border-radius: 12px;
+    padding: 20px;
+    width: 370px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0; /* No extra margin needed since gap handles spacing */
+}
+
+
+
+.job-title {
+    font-size: 12px;
+    font-weight: bold;
+    margin: 0 0 10px;
+    color: #000;
+}
+
+.job-info {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.job-type {
+    font-size: 12px; /* Smaller font size to fit on one line */
+    font-weight: bold;
+    color: #0BA02C;
+    background-color: #E7F6EA;
+    padding: 2px 6px;
+    border-radius: 4px; /* Rounded corners */
+    white-space: nowrap; /* Prevents text wrapping */
+    display: inline-block; /* Ensures background fits the text */
+    line-height: 1.2; /* Adjust vertical alignment */
+}
+
+
+.job-salary {
+    color: #555;
+}
+
+.company-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.company-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.company-name {
+    font-weight: bold;
+    margin: 0;
+}
+
+.company-location {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+}
+
+.location-icon {
+    margin-right: 5px;
+}
+
+.applicant-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.applicants {
+    display: flex;
+    gap: -10px;
+}
+
+.applicant-photo {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    object-fit: cover;
+}
+
+.applicant-count {
+    color: #666;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.details-btn, .apply-btn {
+    padding: 10px 15px;
+    margin-top: auto;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+.details-btn {
+    background-color: #fff;
+    color: #6300B3;
+    border: 2px solid #6300B3;
+}
+
+.apply-btn {
+    background-color: #6300B3;
+    color: #fff;
+}
+
+.details-btn:hover {
+    background-color: #f2e7fe;
+}
+
+.apply-btn:hover {
+    background-color: #6300B3;
+}
+
+.saved-icon{
+    width: 20px;
+}
+
+.job-header {
+    display: flex; /* Use flexbox to align items in a row */
+    align-items: center; /* Vertically center the items */
+    justify-content: space-between; /* Add space between title and icon */
+    margin-bottom: 20px;
+}
+
+.job-title {
+    font-size: 18px; /* Adjust font size as needed */
+    margin: 0; /* Remove any extra margins */
+}
+
+.saved-icon {
+    width: 24px; /* Adjust icon size */
+    height: 24px; /* Maintain proportionate height */
+}
+
+
+
+.vacancy-details p, .vacancy-details ul {
+    font-size: 1.1em;
+    line-height: 1.6em;
+}
+
+.vacancy-details ul {
+    margin-left: 20px;
+}
+
+.apply-btn, .submit-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.apply-btn:hover, .submit-btn:hover {
+    background-color: #45a049;
+}
+
+.apply-form label {
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+}
+
+.apply-form input, .apply-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.apply-form textarea {
+    resize: vertical;
+    height: 150px;
+}
