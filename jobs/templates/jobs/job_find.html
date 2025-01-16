@@ -15,7 +15,7 @@
                     placeholder="Job Title"
                   />
                   <span class="input-icon">
-                    <img src="/images/icon/fi_search.png" alt="Search Icon" width="16" height="16">
+                    <img src="{% static 'images/icon/fi_search.png' %}" alt="Search Icon" width="16" height="16">
                   </span>
                 </div>
               </div>
@@ -29,7 +29,7 @@
                 placeholder="Location"
               />
               <span class="input-icon">
-                <img src="/images/icon/fi_map-pin.png" alt="Search Icon" width="16" height="16">
+                <img src="{% static 'images/icon/fi_map-pin.png' %}" alt="Search Icon" width="16" height="16">
               </span>
               </div>
             </div>
@@ -39,309 +39,40 @@
           </form>
     </section>
     <section class="section-jobs">
-        <h3 class="text-center m-5">All jobs</h3>
-        <!-- Cards Section -->
-        <div class="row row-card justify-content-center">
+    <h3 class="text-center m-5">All Jobs</h3>
+    <!-- Cards Section -->
+    <div class="row row-card justify-content-center">
+        {% for job in jobs %}
         <div class="job-card">
             <div class="job-header">
-                <h3 class="job-title">Technical Support Specialist</h3>
-                <img class="saved-icon" src="/images/icon/saved.png" alt="Saved Icon">
+                <h3 class="job-title">{{ job.title }}</h3>
+                <img class="saved-icon" src="{% static 'images/icon/saved.png' %}" alt="Saved Icon">
             </div>
 
-        <div class="job-info">
-                <span class="job-type">PART-TIME</span>
-                <span class="job-salary">Salary: 20,000 INR - 25,000 INR</span>
+            <div class="job-info">
+                <span class="job-type">{{ job.get_job_type_display }}</span>
+                <span class="job-salary">Salary: {{ job.salary }}$</span>
             </div>
             <div class="company-info">
-                <img src="/images/icon/google1.png" alt="Google Logo" class="company-logo">
+                <img src="#" alt="{{ job.company }} Logo" class="company-logo">
                 <div>
-                    <p class="company-name">Google Inc.</p>
+                    <p class="company-name">{{ job.company }}</p>
                     <p class="company-location">
-                        <span class="location-icon">📍</span> New Delhi, India
+                        <span class="location-icon">📍</span> {{ job.location }}
                     </p>
                 </div>
-            </div>
-            <div class="applicant-info">
-                <div class="applicants">
-                    <img src="/images/icon/applicant1.png" alt="Applicant 1" class="applicant-photo">
-                    <img src="/images/icon/applicant2.png" alt="Applicant 2" class="applicant-photo">
-                    <img src="/images/icon/applicant3.png" alt="Applicant 3" class="applicant-photo">
-                </div>
-                <p class="applicant-count mt-3">10+ applicants</p>
             </div>
             <div class="action-buttons">
                 <button class="details-btn">View details</button>
                 <button class="apply-btn">Apply now</button>
             </div>
         </div>
-
-        <div class="job-card">
-            <div class="job-header">
-                <h3 class="job-title">Data Anlysist</h3>
-                <img class="saved-icon" src="/images/icon/saved.png" alt="Saved Icon">
-            </div>
-
-        <div class="job-info">
-                <span class="job-type">FULL-TIME</span>
-                <span class="job-salary">Salary: 20,000 INR - 25,000 INR</span>
-            </div>
-            <div class="company-info">
-                <img src="/images/icon/facebook1.png" alt="Facebook Logo" class="company-logo">
-                <div>
-                    <p class="company-name">Facebook Inc.</p>
-                    <p class="company-location">
-                        <span class="location-icon">📍</span> London, Great Britain
-                    </p>
-                </div>
-            </div>
-            <div class="applicant-info">
-                <div class="applicants">
-                    <img src="/images/icon/applicant1.png" alt="Applicant 1" class="applicant-photo">
-                    <img src="/images/icon/applicant2.png" alt="Applicant 2" class="applicant-photo">
-                    <img src="/images/icon/applicant3.png" alt="Applicant 3" class="applicant-photo">
-                </div>
-                <p class="applicant-count mt-3">10+ applicants</p>
-            </div>
-            <div class="action-buttons">
-                <button class="details-btn">View details</button>
-                <button class="apply-btn">Apply now</button>
-            </div>
-        </div>
-
-        <div class="job-card">
-            <div class="job-header">
-                <h3 class="job-title">Software Engineer</h3>
-                <a href="#" ><img class="saved-icon" src="/images/icon/saved.png" alt="Saved Icon"></a>
-            </div>
-
-        <div class="job-info">
-                <span class="job-type">PART-TIME</span>
-                <span class="job-salary">Salary: 20,000 INR - 25,000 INR</span>
-            </div>
-            <div class="company-info">
-                <img src="/images/icon/apple-logo 1.png" alt="Linkdln Logo" class="company-logo">
-                <div>
-                    <p class="company-name">Apple Inc.</p>
-                    <p class="company-location">
-                        <span class="location-icon">📍</span> Warsaw, Poland
-                    </p>
-                </div>
-            </div>
-            <div class="applicant-info">
-                <div class="applicants">
-                    <img src="/images/icon/applicant1.png" alt="Applicant 1" class="applicant-photo">
-                    <img src="/images/icon/applicant2.png" alt="Applicant 2" class="applicant-photo">
-                    <img src="/images/icon/applicant3.png" alt="Applicant 3" class="applicant-photo">
-                </div>
-                <p class="applicant-count mt-3">10+ applicants</p>
-            </div>
-            <div class="action-buttons">
-                <button class="details-btn">View details</button>
-                <button class="apply-btn">Apply now</button>
-            </div>
-        </div>
-
-        <div class="job-card">
-            <div class="job-header">
-                <h3 class="job-title">Technical Support Specialist</h3>
-                <img class="saved-icon" src="/images/icon/saved.png" alt="Saved Icon">
-            </div>
-
-        <div class="job-info">
-                <span class="job-type">PART-TIME</span>
-                <span class="job-salary">Salary: 20,000 INR - 25,000 INR</span>
-            </div>
-            <div class="company-info">
-                <img src="/images/icon/google1.png" alt="Google Logo" class="company-logo">
-                <div>
-                    <p class="company-name">Google Inc.</p>
-                    <p class="company-location">
-                        <span class="location-icon">📍</span> New Delhi, India
-                    </p>
-                </div>
-            </div>
-            <div class="applicant-info">
-                <div class="applicants">
-                    <img src="/images/icon/applicant1.png" alt="Applicant 1" class="applicant-photo">
-                    <img src="/images/icon/applicant2.png" alt="Applicant 2" class="applicant-photo">
-                    <img src="/images/icon/applicant3.png" alt="Applicant 3" class="applicant-photo">
-                </div>
-                <p class="applicant-count mt-3">10+ applicants</p>
-            </div>
-            <div class="action-buttons">
-                <button class="details-btn">View details</button>
-                <button class="apply-btn">Apply now</button>
-            </div>
-        </div>
-
-        <div class="job-card">
-            <div class="job-header">
-                <h3 class="job-title">Data Anlysist</h3>
-                <img class="saved-icon" src="/images/icon/saved.png" alt="Saved Icon">
-            </div>
-
-        <div class="job-info">
-                <span class="job-type">FULL-TIME</span>
-                <span class="job-salary">Salary: 20,000 INR - 25,000 INR</span>
-            </div>
-            <div class="company-info">
-                <img src="/images/icon/facebook1.png" alt="Facebook Logo" class="company-logo">
-                <div>
-                    <p class="company-name">Facebook Inc.</p>
-                    <p class="company-location">
-                        <span class="location-icon">📍</span> London, Great Britain
-                    </p>
-                </div>
-            </div>
-            <div class="applicant-info">
-                <div class="applicants">
-                    <img src="/images/icon/applicant1.png" alt="Applicant 1" class="applicant-photo">
-                    <img src="/images/icon/applicant2.png" alt="Applicant 2" class="applicant-photo">
-                    <img src="/images/icon/applicant3.png" alt="Applicant 3" class="applicant-photo">
-                </div>
-                <p class="applicant-count mt-3">10+ applicants</p>
-            </div>
-            <div class="action-buttons">
-                <button class="details-btn">View details</button>
-                <button class="apply-btn">Apply now</button>
-            </div>
-        </div>
-
-        <div class="job-card">
-            <div class="job-header">
-                <h3 class="job-title">Software Engineer</h3>
-                <a href="#" ><img class="saved-icon" src="/images/icon/saved.png" alt="Saved Icon"></a>
-            </div>
-
-        <div class="job-info">
-                <span class="job-type">PART-TIME</span>
-                <span class="job-salary">Salary: 20,000 INR - 25,000 INR</span>
-            </div>
-            <div class="company-info">
-                <img src="/images/icon/apple-logo 1.png" alt="Linkdln Logo" class="company-logo">
-                <div>
-                    <p class="company-name">Apple Inc.</p>
-                    <p class="company-location">
-                        <span class="location-icon">📍</span> Warsaw, Poland
-                    </p>
-                </div>
-            </div>
-            <div class="applicant-info">
-                <div class="applicants">
-                    <img src="/images/icon/applicant1.png" alt="Applicant 1" class="applicant-photo">
-                    <img src="/images/icon/applicant2.png" alt="Applicant 2" class="applicant-photo">
-                    <img src="/images/icon/applicant3.png" alt="Applicant 3" class="applicant-photo">
-                </div>
-                <p class="applicant-count mt-3">10+ applicants</p>
-            </div>
-            <div class="action-buttons">
-                <button class="details-btn">View details</button>
-                <button class="apply-btn">Apply now</button>
-            </div>
-        </div>
-
-        <div class="job-card">
-            <div class="job-header">
-                <h3 class="job-title">Technical Support Specialist</h3>
-                <img class="saved-icon" src="/images/icon/saved.png" alt="Saved Icon">
-            </div>
-
-        <div class="job-info">
-                <span class="job-type">PART-TIME</span>
-                <span class="job-salary">Salary: 20,000 INR - 25,000 INR</span>
-            </div>
-            <div class="company-info">
-                <img src="/images/icon/google1.png" alt="Google Logo" class="company-logo">
-                <div>
-                    <p class="company-name">Google Inc.</p>
-                    <p class="company-location">
-                        <span class="location-icon">📍</span> New Delhi, India
-                    </p>
-                </div>
-            </div>
-            <div class="applicant-info">
-                <div class="applicants">
-                    <img src="/images/icon/applicant1.png" alt="Applicant 1" class="applicant-photo">
-                    <img src="/images/icon/applicant2.png" alt="Applicant 2" class="applicant-photo">
-                    <img src="/images/icon/applicant3.png" alt="Applicant 3" class="applicant-photo">
-                </div>
-                <p class="applicant-count mt-3">10+ applicants</p>
-            </div>
-            <div class="action-buttons">
-                <button class="details-btn">View details</button>
-                <button class="apply-btn">Apply now</button>
-            </div>
-        </div>
-
-        <div class="job-card">
-            <div class="job-header">
-                <h3 class="job-title">Data Anlysist</h3>
-                <img class="saved-icon" src="/images/icon/saved.png" alt="Saved Icon">
-            </div>
-
-        <div class="job-info">
-                <span class="job-type">FULL-TIME</span>
-                <span class="job-salary">Salary: 20,000 INR - 25,000 INR</span>
-            </div>
-            <div class="company-info">
-                <img src="/images/icon/facebook1.png" alt="Facebook Logo" class="company-logo">
-                <div>
-                    <p class="company-name">Facebook Inc.</p>
-                    <p class="company-location">
-                        <span class="location-icon">📍</span> London, Great Britain
-                    </p>
-                </div>
-            </div>
-            <div class="applicant-info">
-                <div class="applicants">
-                    <img src="/images/icon/applicant1.png" alt="Applicant 1" class="applicant-photo">
-                    <img src="/images/icon/applicant2.png" alt="Applicant 2" class="applicant-photo">
-                    <img src="/images/icon/applicant3.png" alt="Applicant 3" class="applicant-photo">
-                </div>
-                <p class="applicant-count mt-3">10+ applicants</p>
-            </div>
-            <div class="action-buttons">
-                <button class="details-btn">View details</button>
-                <button class="apply-btn">Apply now</button>
-            </div>
-        </div>
-
-        <div class="job-card">
-            <div class="job-header">
-                <h3 class="job-title">Software Engineer</h3>
-                <a href="#" ><img class="saved-icon" src="/images/icon/saved.png" alt="Saved Icon"></a>
-            </div>
-
-        <div class="job-info">
-                <span class="job-type">PART-TIME</span>
-                <span class="job-salary">Salary: 20,000 INR - 25,000 INR</span>
-            </div>
-            <div class="company-info">
-                <img src="/images/icon/apple-logo 1.png" alt="Linkdln Logo" class="company-logo">
-                <div>
-                    <p class="company-name">Apple Inc.</p>
-                    <p class="company-location">
-                        <span class="location-icon">📍</span> Warsaw, Poland
-                    </p>
-                </div>
-            </div>
-            <div class="applicant-info">
-                <div class="applicants">
-                    <img src="/images/icon/applicant1.png" alt="Applicant 1" class="applicant-photo">
-                    <img src="/images/icon/applicant2.png" alt="Applicant 2" class="applicant-photo">
-                    <img src="/images/icon/applicant3.png" alt="Applicant 3" class="applicant-photo">
-                </div>
-                <p class="applicant-count mt-3">10+ applicants</p>
-            </div>
-            <div class="action-buttons">
-                <button class="details-btn">View details</button>
-                <button class="apply-btn">Apply now</button>
-            </div>
-        </div>
-
+        {% empty %}
+        <p class="text-center">No jobs found.</p>
+        {% endfor %}
     </div>
     <div class="text-center mt-5">
         <a href="#">View More</a>
-      </div>
-    </section>
+    </div>
+</section>
 {% endblock %}

@@ -1,89 +1,77 @@
-
 document.addEventListener("DOMContentLoaded", () => {
-  // Elements
-  const form = document.querySelector("form");
-  const firstName = document.getElementById("first_name");
-  const lastName = document.getElementById("last_name");
-  const username = document.getElementById("username");
-  const email = document.getElementById("email");
-  const password1 = document.getElementById("password1");
-  const password2 = document.getElementById("password2");
+  // Registration Form Logic
+  const registrationForm = document.getElementById("registrationForm");
 
-  // Error Display Helper
-  const showError = (input, message) => {
-    let error = input.nextElementSibling;
-    if (!error) {
-      error = document.createElement("small");
-      error.className = "text-danger";
-      input.parentNode.appendChild(error);
-    }
-    error.textContent = message;
-  };
+  if (registrationForm) {
+    const firstName = document.getElementById("first_name");
+    const lastName = document.getElementById("last_name");
+    const username = document.getElementById("username");
+    const email = document.getElementById("email");
+    const password1 = document.getElementById("password1");
+    const password2 = document.getElementById("password2");
 
-  const clearError = (input) => {
-    let error = input.nextElementSibling;
-    if (error) {
-      error.textContent = "";
-    }
-  };
+    registrationForm.addEventListener("submit", (e) => {
+      e.preventDefault();
 
-  // Validation Functions
-  const validateNotEmpty = (input, fieldName) => {
-    if (input.value.trim() === "") {
-      showError(input, `${fieldName} cannot be empty.`);
-      return false;
-    }
-    clearError(input);
-    return true;
-  };
+      const isValid =
+        validateNotEmpty(firstName, "First Name") &&
+        validateNotEmpty(lastName, "Last Name") &&
+        validateNotEmpty(username, "Username") &&
+        validateEmail(email) &&
+        validatePasswordStrength() &&
+        validatePasswordMatch();
 
-  const validateEmail = (input) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(input.value)) {
-      showError(input, "Please enter a valid email.");
-      return false;
-    }
-    clearError(input);
-    return true;
-  };
+      if (isValid) registrationForm.submit();
+    });
+  }
 
-  const validatePasswordMatch = () => {
-    if (password1.value !== password2.value) {
-      showError(password2, "Passwords do not match.");
-      return false;
-    }
-    clearError(password2);
-    return true;
-  };
+  // Target the login form
+  const loginForm = document.getElementById("loginForm");
 
-  const validatePasswordStrength = () => {
-    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-    if (!passwordRegex.test(password1.value)) {
-      showError(password1, "Password must be at least 8 characters long and include letters and numbers.");
-      return false;
-    }
-    clearError(password1);
-    return true;
-  };
+  // Proceed only if the form exists
+  if (loginForm) {
+    // Select fields
+    const usernameField = document.getElementById("username");
+    const passwordField = document.getElementById("password");
 
+    // Function to show error messages
+    const showError = (input, message) => {
+      let error = input.nextElementSibling;
+      if (!error) {
+        error = document.createElement("small");
+        error.className = "text-danger";
+        input.parentNode.appendChild(error);
+      }
+      error.textContent = message;
+    };
 
+    // Function to clear error messages
+    const clearError = (input) => {
+      let error = input.nextElementSibling;
+      if (error) error.textContent = "";
+    };
 
-  // Form Submission Handler
-  form.addEventListener("submit", (e) => {
-    e.preventDefault(); // Prevent form submission
+    // Validate that a field is not empty
+    const validateNotEmpty = (input, fieldName) => {
+      if (input.value.trim() === "") {
+        showError(input, `${fieldName} cannot be empty.`);
+        return false;
+      }
+      clearError(input);
+      return true;
+    };
 
-    // Validate Fields
-    const isValid =
-      validateNotEmpty(firstName, "First Name") &&
-      validateNotEmpty(lastName, "Last Name") &&
-      validateNotEmpty(username, "Username") &&
-      validateEmail(email) &&
-      validatePasswordStrength() &&
-      validatePasswordMatch();
+    // Add form submission handler
+    loginForm.addEventListener("submit", (e) => {
+      e.preventDefault(); // Prevent default form submission
 
-    if (isValid) {
-      form.submit(); // Submit the form if all validations pass
-    }
-  });
+      // Validate username and password fields
+      const isUsernameValid = validateNotEmpty(usernameField, "Username");
+      const isPasswordValid = validateNotEmpty(passwordField, "Password");
+
+      if (isUsernameValid && isPasswordValid) {
+        loginForm.submit(); // Submit the form if both fields are valid
+      }
+    });
+  }
 });
-

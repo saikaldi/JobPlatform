@@ -1,4 +1,6 @@
 {% load static %}
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -63,19 +65,24 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url "posts:posts" %}">Post Job</a>
             </li>
+            {% if user.is_authenticated %}
             <li class="nav-item">
               <a class="nav-link" href="{% url "users:profile" %}">Profile</a>
             </li>
+            {% endif %}
           </ul>
           <!-- <form class="d-flex" role="search"> -->
-          <a href="#" id="contact-btn" class="btn btn-contact">Contact Us</a>
 
-          <a href="{% url "users:login" %}" class="btn" type="submit">Login</a>
+         {% if not user.is_authenticated %}
+          <a href="{% url "users:login" %}" class="btn" >Login</a>
+         {% else %}
+            <a href="{% url "users:logout" %}"  class="btn btn-contact">Logout</a>
+          {% endif %}
           <!-- </form> -->
         </div>
       </div>
     </nav>
-
+{% include "includes/notifications.html" %}
     {% block content %} {% endblock %}
 
 

@@ -5,6 +5,7 @@ from .forms import UserRegistrationForm, ProfileForm
 from django.shortcuts import render, reverse, redirect
 from django.http import HttpResponseRedirect
 from django.contrib import auth, messages
+from .forms import UserLoginForm, UserRegistrationForm, ProfileForm
 
 def register(request):
     if request.method == 'POST':
@@ -33,19 +34,45 @@ def register(request):
 
 def login_view(request):  # Avoid using "Login" as the function name
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
+        form = UserLoginForm(data=request.POST)
+        if form.is_valid():
+            username = request.POST['username']
+            password = request.POST['password']
+            user = auth.authenticate(username=username, password=password)
+            remember_me = request.POST.get('remember_me')
 
-        if user is not None:
-            login(request, user)  # Logs in the user
-            messages.success(request, f'Welcome {username}!')
-            return redirect('index')  # Redirects to the "index" view
+            messages.get_messages(request)
+
+            if user:
+                auth.login(request, user)
+                if remember_me:
+                    # Extend the session duration to 30 days
+                    request.session.set_expiry(30 * 24 * 60 * 60)  # 30 days
+                else:
+                    # End the session when the browser closes
+                    request.session.set_expiry(0)
+
+                messages.success(request, f'{username}, You successfully logged in')
+
+                redirect_page = request.POST.get('next', None)
+                if redirect_page and redirect_page != reverse('user:logout'):
+                    return HttpResponseRedirect(request.POST.get('next'))
+
+                return HttpResponseRedirect(reverse('main:index'))
         else:
-            messages.error(request, 'Account does not exist. Please sign up.')
+            # Add error message for invalid credentials
+            messages.error(request, 'Invalid username or password. Please try again.')
 
-    form = AuthenticationForm()
-    return render(request, 'users/login.html', {'form': form})
+
+    else:
+
+        form = UserLoginForm()
+
+    context = {
+        'title': 'Home - Authentication',
+        'form':form
+    }
+    return render(request, 'users/login.html', context)
 
 @login_required
 def logout(request):
