@@ -12,8 +12,8 @@ def index(request):
     return render(request, "main/index.html", context=context)
 
 
-# def about(request):
-#     return render(request, "main/about.html")
+def about(request):
+    return render(request, "main/about.html")
 
 
 # def more_designs(request):

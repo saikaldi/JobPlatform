@@ -1,58 +1,70 @@
-from django.shortcuts import render, redirect
-from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
-from .forms import UserRegisterForm
-from django.core.mail import send_mail
-from django.core.mail import EmailMultiAlternatives
-from django.template.loader import get_template
-from django.template import Context
+from .forms import UserRegistrationForm, ProfileForm
+from django.shortcuts import render, reverse, redirect
+from django.http import HttpResponseRedirect
+from django.contrib import auth, messages
 
-
-#################### index#######################################
-def index(request):
-    return render(request, 'users/index.html', {'title': 'index'})
-
-
-########### register here #####################################
 def register(request):
     if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
+        form = UserRegistrationForm(data=request.POST)
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            email = form.cleaned_data.get('email')
-            ######################### mail system ####################################
-            htmly = get_template('user/Email.html')
-            d = {'username': username}
-            subject, from_email, to = 'welcome', 'your_email@gmail.com', email
-            html_content = htmly.render(d)
-            msg = EmailMultiAlternatives(subject, html_content, from_email, [to])
-            msg.attach_alternative(html_content, "text/html")
-            msg.send()
-            ##################################################################
-            messages.success(request, f'Your account has been created ! You are now able to log in')
-            return redirect('login')
+            user=form.save()
+            print(f"User {user.username} successfully created.")
+
+            session_key = request.session.session_key
+
+            user = form.instance
+            auth.login(request, user)
+
+            if session_key:
+                messages.success(request, f"{user.username}, You have successfully registered and logged into your account")
+            return HttpResponseRedirect(reverse('main:index'))
     else:
-        form = UserRegisterForm()
-    return render(request, 'users/register.html', {'form': form, 'title': 'register here'})
+        form = UserRegistrationForm()
+
+    context = {
+        'title': 'Home - Registration',
+        'form': form
+    }
+    return render(request, 'users/register.html', context)
 
 
-################ login forms###################################################
-def Login(request):
+def login_view(request):  # Avoid using "Login" as the function name
     if request.method == 'POST':
-
-        # AuthenticationForm_can_also_be_used__
-
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
+
         if user is not None:
-            form = login(request, user)
-            messages.success(request, f' welcome {username} !!')
-            return redirect('index')
+            login(request, user)  # Logs in the user
+            messages.success(request, f'Welcome {username}!')
+            return redirect('index')  # Redirects to the "index" view
         else:
-            messages.info(request, f'account done not exit plz sign in')
+            messages.error(request, 'Account does not exist. Please sign up.')
+
     form = AuthenticationForm()
-    return render(request, 'users/login.html', {'form': form, 'title': 'log in'})
+    return render(request, 'users/login.html', {'form': form})
+
+@login_required
+def logout(request):
+    messages.success(request, f'{request.user.username}, You successfully logged out ')
+    auth.logout(request)
+    return redirect(reverse('main:index'))
+
+# @login_required
+def profile(request):
+    # if request.method == 'POST':
+    #     form = ProfileForm(data=request.POST, instance=request.user, files=request.FILES)
+    #     if form.is_valid():
+    #         form.save()
+    #         messages.success(request, f' Profile successfully updated')
+    #         return HttpResponseRedirect(reverse('user:profile'))
+    # else:
+    #     form = ProfileForm(instance=request.user)
+    # context = {
+    #     'title': 'Home - Cabinet',
+    #     'form': form,
+    # }
+    return render(request, 'users/profile.html')

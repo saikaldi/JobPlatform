@@ -1,2 +1,279 @@
 {% extends "base.html" %}
 {% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid" id="grad">
+      <div class="row align-items-center">
+        <div class="col-12 col-md-5">
+          <h1>Find a job that aligns with your interests and skills</h1>
+          <p>
+            Thousands of jobs in all the leading sector are waiting for you.
+          </p>
+          <form class="d-flex bg-white p-3 rounded shadow-sm">
+            <div class="form-group me-2">
+              <label for="jobTitle" class="d-none">Job Title</label>
+              <div class="input-container">
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  id="jobTitle"
+                  placeholder="Job Title"
+                />
+                <span class="input-icon">
+                  <img
+                    src="/images/icon/fi_search.png"
+                    alt="Search Icon"
+                    width="16"
+                    height="16"
+                  />
+                </span>
+              </div>
+            </div>
+            <div class="form-group me-2">
+              <label for="location" class="d-none">Location</label>
+              <div class="input-container">
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  id="location"
+                  placeholder="Location"
+                />
+                <span class="input-icon">
+                  <img
+                    src="/images/icon/fi_map-pin.png"
+                    alt="Search Icon"
+                    width="16"
+                    height="16"
+                  />
+                </span>
+              </div>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn-search">Find Job</button>
+            </div>
+          </form>
+
+          <p>
+            Suggestion: UI/UX Designer, Programming, Digital Marketing, Video,
+            Animation
+          </p>
+        </div>
+        <div class="col-12 col-md-7 d-flex justify-content-end">
+          <img class="content-img" src="./images/content.png" alt="" />
+        </div>
+      </div>
+    </div>
+
+    <section class="section-jobs">
+      <div class="container-fluid">
+        <!-- Title and Description -->
+        <h1 class="mt-5 text-center">Featured Jobs</h1>
+        <p class="mb-5 text-center">
+          Choose jobs from the top employers and apply for the same.
+        </p>
+
+        <!-- Cards Section -->
+        <div class="row row-card justify-content-center">
+          <div class="job-card">
+            <div class="job-header">
+              <h3 class="job-title">Technical Support Specialist</h3>
+              <img
+                class="saved-icon"
+                src="/images/icon/saved.png"
+                alt="Saved Icon"
+              />
+            </div>
+
+            <div class="job-info">
+              <span class="job-type">PART-TIME</span>
+              <span class="job-salary">Salary: 20,000 INR - 25,000 INR</span>
+            </div>
+            <div class="company-info">
+              <img
+                src="/images/icon/google1.png"
+                alt="Google Logo"
+                class="company-logo"
+              />
+              <div>
+                <p class="company-name">Google Inc.</p>
+                <p class="company-location">
+                  <span class="location-icon">📍</span> New Delhi, India
+                </p>
+              </div>
+            </div>
+            <div class="applicant-info">
+              <div class="applicants">
+                <img
+                  src="/images/icon/applicant1.png"
+                  alt="Applicant 1"
+                  class="applicant-photo"
+                />
+                <img
+                  src="/images/icon/applicant2.png"
+                  alt="Applicant 2"
+                  class="applicant-photo"
+                />
+                <img
+                  src="/images/icon/applicant3.png"
+                  alt="Applicant 3"
+                  class="applicant-photo"
+                />
+              </div>
+              <p class="applicant-count mt-3">10+ applicants</p>
+            </div>
+            <div class="action-buttons">
+              <a href="/view_job_detail.html" class="details-btn btn"
+                >View details</a
+              >
+              <a href="/apply.html" class="apply-btn btn">Apply now</a>
+            </div>
+          </div>
+
+          <div class="job-card">
+            <div class="job-header">
+              <h3 class="job-title">Technical Support Specialist</h3>
+              <img
+                class="saved-icon"
+                src="/images/icon/saved.png"
+                alt="Saved Icon"
+              />
+            </div>
+
+            <div class="job-info">
+              <span class="job-type">PART-TIME</span>
+              <span class="job-salary">Salary: 20,000 INR - 25,000 INR</span>
+            </div>
+            <div class="company-info">
+              <img
+                src="/images/icon/google1.png"
+                alt="Google Logo"
+                class="company-logo"
+              />
+              <div>
+                <p class="company-name">Google Inc.</p>
+                <p class="company-location">
+                  <span class="location-icon">📍</span> New Delhi, India
+                </p>
+              </div>
+            </div>
+            <div class="applicant-info">
+              <div class="applicants">
+                <img
+                  src="/images/icon/applicant1.png"
+                  alt="Applicant 1"
+                  class="applicant-photo"
+                />
+                <img
+                  src="/images/icon/applicant2.png"
+                  alt="Applicant 2"
+                  class="applicant-photo"
+                />
+                <img
+                  src="/images/icon/applicant3.png"
+                  alt="Applicant 3"
+                  class="applicant-photo"
+                />
+              </div>
+              <p class="applicant-count mt-3">10+ applicants</p>
+            </div>
+            <div class="action-buttons">
+              <a href="/view_job_detail.html" class="details-btn btn"
+                >View details</a
+              >
+              <a href="/apply.html" class="apply-btn btn">Apply now</a>
+            </div>
+          </div>
+
+          <div class="job-card">
+            <div class="job-header">
+              <h3 class="job-title">Technical Support Specialist</h3>
+              <img
+                class="saved-icon"
+                src="/images/icon/saved.png"
+                alt="Saved Icon"
+              />
+            </div>
+
+            <div class="job-info">
+              <span class="job-type">PART-TIME</span>
+              <span class="job-salary">Salary: 20,000 INR - 25,000 INR</span>
+            </div>
+            <div class="company-info">
+              <img
+                src="/images/icon/google1.png"
+                alt="Google Logo"
+                class="company-logo"
+              />
+              <div>
+                <p class="company-name">Google Inc.</p>
+                <p class="company-location">
+                  <span class="location-icon">📍</span> New Delhi, India
+                </p>
+              </div>
+            </div>
+            <div class="applicant-info">
+              <div class="applicants">
+                <img
+                  src="/images/icon/applicant1.png"
+                  alt="Applicant 1"
+                  class="applicant-photo"
+                />
+                <img
+                  src="/images/icon/applicant2.png"
+                  alt="Applicant 2"
+                  class="applicant-photo"
+                />
+                <img
+                  src="/images/icon/applicant3.png"
+                  alt="Applicant 3"
+                  class="applicant-photo"
+                />
+              </div>
+              <p class="applicant-count mt-3">10+ applicants</p>
+            </div>
+            <div class="action-buttons">
+              <a href="/view_job_detail.html" class="details-btn btn"
+                >View details</a
+              >
+              <a href="/apply.html" class="apply-btn btn">Apply now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- View All Link -->
+    <a href="/job_search.html" class="text-center mt-4 view-all-text d-block"
+      >View All</a
+    >
+
+    <div class="container-fluid mt-5">
+      <p class="text-center">Top Companies hiring now</p>
+      <hr />
+
+      <div class="company-icons d-flex justify-content-center">
+        <a href="#" class="company-icon">
+          <img class="icons" src="./images/icon/google.png" alt="Google" />
+        </a>
+        <a href="#" class="company-icon">
+          <img
+            class="icons"
+            src="./images/icon/microsoft.png"
+            alt="Microsoft"
+          />
+        </a>
+        <a href="#" class="company-icon">
+          <img class="icons" src="./images/icon/flipkart.png" alt="Flipkart" />
+        </a>
+        <a href="#" class="company-icon">
+          <img class="icons" src="./images/icon/youtube.png" alt="YouTube" />
+        </a>
+        <a href="#" class="company-icon">
+          <img class="icons" src="./images/icon/ibm.png" alt="IBM" />
+        </a>
+      </div>
+    </div>
+{% endblock %}

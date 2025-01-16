@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="login-form-container">
+    <div class="container-fluid ml-1 login-form">
+      <h2>Register Your Account</h2>
+      <p>Welcome! Fill out the form below to create your account.</p>
+      <form autocomplete="on" action="{% url "users:register" %}" method="post">
+      {% csrf_token %}
+        <div class="form-group">
+          <label for="first_name">First Name</label>
+          <input
+            type="text"
+            class="form-control form-control-sm"
+            id="first_name"
+            name="first_name"
+            placeholder="Enter First Name"
+          />
+          <small class="text-danger"></small>
+        </div>
+        <div class="form-group">
+          <label for="last_name">Last Name</label>
+          <input
+            type="text"
+            class="form-control form-control-sm"
+            id="last_name"
+            name="last_name"
+            placeholder="Enter Last Name"
+          />
+          <small class="text-danger"></small>
+        </div>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            class="form-control form-control-sm"
+            id="username"
+            name="username"
+            placeholder="Enter Username"
+          />
+          <small class="text-danger"></small>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input
+            type="email"
+            class="form-control form-control-sm"
+            id="email"
+            name="email"
+            placeholder="Enter email"
+          />
+          {% for error in form.email.errors %}
+            <small class="text-danger">{{ error }}</small>
+        {% endfor %}
+        </div>
+
+        <div class="form-group">
+          <label for="password1">Password</label>
+          <input
+            type="password"
+            class="form-control form-control-sm"
+            id="password1"
+            name="password1"
+            placeholder="Enter password"
+          />
+          <small class="text-danger"></small>
+        </div>
+
+        <div class="form-group">
+          <label for="password2">Confirm Password</label>
+          <input
+            type="password"
+            class="form-control form-control-sm"
+            id="password2"
+            name="password2"
+            placeholder="Confirm password"
+          />
+          <small class="text-danger"></small>
+        </div>
+
+
+
+        <div class="form-group form-check">
+          <input
+            type="checkbox"
+            class="form-check-input"
+            id="updates"
+            name="updates"
+          />
+          <label class="form-check-label" for="updates">
+            Send me important updates
+          </label>
+        </div>
+
+        <div class="form-group form-check">
+          <input
+            type="checkbox"
+            class="form-check-input"
+            id="terms"
+            name="terms"
+            required
+          />
+          <label class="form-check-label" for="terms">
+            I accept the <a href="#">Terms and Conditions</a>
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-login">Sign Up</button>
+      </form>
+
+      <hr />
+      <p>or sign up with</p>
+      <ul class="navbar-nav d-flex flex-row align-items-center me-auto my-2 my-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <img src="{% static 'images/icon/google1.png' %}" alt="Google Logo" />
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <img src="{% static 'images/icon/facebook1.png' %}"  alt="" />
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <img src="{% static 'images/icon/linkedln1.png' %}" alt="" />
+          </a>
+        </li>
+      </ul>
+
+      <p>
+        Already have an account? <a href="{% url "users:login" %}">Login</a>
+      </p>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -41,9 +41,13 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     "drf_spectacular",
     "crispy_forms",
+'crispy_bootstrap4',
     "main",
     "users",
+    "jobs",
+    "posts",
 ]
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     "DEFAULT_AUTHENTICATION_CLASSES": (
@@ -130,7 +134,20 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = '/static/'
+
+# Directory for static files (used for collectstatic)
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+# Additional directories where Django looks for static files
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+
+MEDIA_URL = 'media/'
+
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

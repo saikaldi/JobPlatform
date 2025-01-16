@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+      <div class="login-form-container">
+      <div class="container-fluid ml-1 login-form">
+        <h2>Login to your Account</h2>
+        <p>Welcome back! Select the below login methods.</p>
+        <form method="POST" action="{% url 'users:login' %}">
+        {% csrf_token %}
+
+            <div class="form-group">
+              <label for="exampleInputEmail1">Username</label>
+              <input type="email" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email / username">
+              </div>
+            <div class="form-group ">
+              <label for="exampleInputPassword1">Password</label>
+              <input type="password" class="form-control form-control-sm " id="exampleInputPassword1" placeholder="Password">
+            </div>
+            <div class="form-group form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1">
+              <label class="form-check-label" for="exampleCheck1">Remeber me</label>
+              <a href="#">Forgot password?</a>
+            </div>
+            <a href="#" type="submit" class="btn-login glyphicon glyphicon-log-in">Login</a>
+          </form>
+
+
+          <hr>
+          <p>or login with</p>
+          <ul class="navbar-nav d-flex flex-row align-items-center me-auto me-auto my-2 my-lg-0">
+            <li class="nav-item"><a class="nav-link" href="#"><img src="/images/icon/google1.png" alt=""></a></li>
+            <li class="nav-item"><a class="nav-link" href="#"><img src="/images/icon/facebook1.png" alt=""></a></li>
+            <li class="nav-item"><a class="nav-link" href="#"><img src="/images/icon/linkedln1.png" alt=""></a></li>
+
+        </ul>
+        <p>Don’t have an account? <a href="{% url "users:register" %}">Register</a></p>
+      </div>
+      </div>
+
+{% endblock %}

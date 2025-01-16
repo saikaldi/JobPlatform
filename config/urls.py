@@ -23,8 +23,10 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("users/", include("users.urls")),
     path('', include('main.urls', namespace='main')),
+    path("users/", include('users.urls', namespace='users')),
+    path("jobs/", include('jobs.urls', namespace='jobs')),
+    path("job_posts/", include('posts.urls', namespace='posts')),
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path(
         "api/docs/",
