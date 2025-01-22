@@ -1,0 +1,48 @@
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.pdb
+*.log
+
+# Django
+*.sqlite3
+db.sqlite3
+media/
+static/
+*.log
+
+# Environment files
+.env
+*.env
+
+# Virtual environment
+.venv/
+venv/
+ENV/
+env/
+
+# PyCharm or VSCode settings
+.idea/
+.vscode/
+
+# MacOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Coverage directory used by coverage.py
+.coverage
+.coverage.*
+nosetests.xml
+*.cover
+
+# pytest
+.cache
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+.pyre/

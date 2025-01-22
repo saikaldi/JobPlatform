@@ -13,20 +13,11 @@ def register(request):
         form = UserRegistrationForm(data=request.POST)
 
         if form.is_valid():
-            # Save the user instance
             user = form.save()
-
-            # Log success in the console
             print(f"User {user.username} successfully created.")
-
-            # Log the user in automatically after registration
             auth.login(request, user)
-
-            # Success message
             messages.success(request, f"{user.username}, you have successfully registered and logged into your account.")
-
-            # Redirect to the home page or another page
-            return redirect('main:index')  # Replace 'main:index' with your desired redirect page
+            return redirect('main:index')
         else:
             print(form.errors)
             messages.error(request, "There was an error with your registration. Please check the form and try again.")
