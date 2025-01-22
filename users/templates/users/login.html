@@ -8,22 +8,31 @@
       <div class="container-fluid ml-1 login-form">
         <h2>Login to your Account</h2>
         <p>Welcome back! Select the below login methods.</p>
+
+
         <form method="POST" action="{% url 'users:login' %}">
         {% csrf_token %}
 
             <div class="form-group">
               <label for="username">Username</label>
               <input type="text" class="form-control form-control-sm" id="username" name="username"
-              aria-describedby="emailHelp" placeholder="Enter username">
+              aria-describedby="emailHelp" placeholder="Enter username" value="{{ form.username.value|default:''  }}">
+              {% for error in form.username.errors %}
+            <small class="text-danger">{{ error }}</small>
+        {% endfor %}
               </div>
             <div class="form-group ">
               <label for="password">Password</label>
-              <input type="password" class="form-control form-control-sm " id="password" name="password" placeholder="Password">
+              <input type="password" class="form-control form-control-sm " id="password" name="password"
+              placeholder="Password" value="{{ form.password.value|default:''  }}">
+              {% for error in form.password.errors %}
+            <small class="text-danger">{{ error }}</small>
+        {% endfor %}
             </div>
             <div class="form-group form-check">
                 <input type="checkbox" class="form-check-input" id="remember_me" name="remember_me">
                 <label class="form-check-label" for="remember_me">Remember me</label>
-                <a href="#">Forgot password?</a>
+
             </div>
             <button type="submit" class="btn btn-login">Login</button>
 
@@ -43,6 +52,7 @@
         <p>Don’t have an account? <a href="{% url "users:register" %}">Register</a></p>
       </div>
       </div>
+
 
 {% endblock %}
 

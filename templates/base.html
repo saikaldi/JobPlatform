@@ -24,8 +24,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{% static 'js/script.js' %}"></script>
+
+
 
 
 <!--     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet"> -->
@@ -83,9 +85,11 @@
       </div>
     </nav>
 {% include "includes/notifications.html" %}
-    {% block content %} {% endblock %}
+{% block content %}
+{% endblock %}
 
-
+{% block jobs_section %}
+{% endblock %}
 
 
     <footer class="footer container-fluid">
@@ -94,81 +98,62 @@
           <div class="col text-start">
             <a href="#"><img src="{% static "images/logo.png" %}" alt="" /></a>
             <a class="navbar-brand logo" href="{% url "main:index" %}">ApplyAlways</a>
-            <p class="mt-5">Call now: +91 9591776078</p>
+            <p class="mt-5">Call now: +39 3519873510</p>
             <p>
-              456 Chandni Chowk Street, Near Red Fort, Old Delhi, New Delhi,
-              Delhi 110006, India
+              456 Francesco Basile 10 Street, Messina, Sicily, Italy
             </p>
           </div>
           <div class="col text-start">
-            <h6>Quick Link</h6>
+            <h6>Quik Links</h6>
             <ul class="navbar-nav me-auto my-2 my-lg-0">
               <li class="nav-item"><a class="nav-link" href="{% url "main:about" %}">About</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
               <li class="nav-item"><a class="nav-link" href="{% url "admin:index" %}">Admin</a></li>
             </ul>
           </div>
           <div class="col text-start">
-            <h6>Candidate</h6>
+            <h6>Quik Links</h6>
             <ul class="navbar-nav me-auto my-2 my-lg-0">
               <li class="nav-item">
                 <a class="nav-link" href="{% url "jobs:jobs" %}">Browse Jobs</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Browse Employers</a>
+                <a class="nav-link" href="{% url 'posts:posts' %}">Post a Job</a>
               </li>
+            {% if user.is_authenticated %}
               <li class="nav-item">
-                <a class="nav-link" href="#">Candidate Dashboard</a>
+                <a class="nav-link" href="{% url 'users:profile' %}">Saved Jobs</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Saved Jobs</a>
-              </li>
+            {% endif %}
+
             </ul>
           </div>
-          <div class="col text-start">
-            <h6>Employers</h6>
-            <ul class="navbar-nav me-auto my-2 my-lg-0">
-              <li class="nav-item">
-                <a class="nav-link" href="#">Post a Job</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Browse Candidates</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Employers Dashboard</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Applications</a>
-              </li>
-            </ul>
-          </div>
-        </div>
+
         <hr class="m-5" />
         <div class="row mt-4">
           <div class="col text-center text-lg-start">
-            <p>@ 2022 AlwaysApply - Job Portal. All rights Reserved</p>
+            <p>@ 2025 AlwaysApply - Job Portal. All rights Reserved</p>
           </div>
           <div class="col text-center text-lg-end">
             <ul
               class="social-icons d-flex justify-content-center justify-content-lg-end"
             >
               <li class="nav-item mx-2">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="https://www.facebook.com/?locale=it_IT">
                   <img src="{% static 'images/icon/facebook.png' %}" alt="Facebook" />
                 </a>
               </li>
               <li class="nav-item mx-2">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="https://www.youtube.com/">
                   <img src="{% static 'images/icon/youtube11.png' %}" alt="YouTube" />
                 </a>
               </li>
               <li class="nav-item mx-2">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="https://www.instagram.com/">
                   <img src="{% static 'images/icon/instagram.png' %}" alt="Instagram" />
                 </a>
               </li>
               <li class="nav-item mx-2">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="https://x.com/?mx=2">
                   <img src="{% static 'images/icon/twitter.png' %}" alt="Twitter" />
                 </a>
               </li>

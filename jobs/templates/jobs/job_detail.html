@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>{{ job.title }}</h1>
+    <p><strong>Company:</strong> {{ job.company }}</p>
+    <p><strong>Location:</strong> {{ job.location }}</p>
+    <p><strong>Job Type:</strong> {{ job.get_job_type_display }}</p>
+    <p><strong>Salary:</strong> {{ job.salary }}</p>
+    <p><strong>Description:</strong></p>
+    <p>{{ job.description }}</p>
+    <p><strong>Contact Email:</strong> {{ job.contact_email }}</p>
+    {% if job.logo %}
+        <img src="{{ job.logo.url }}" alt="{{ job.company }} Logo" class="company-logo">
+    {% endif %}
+    <a href="{% url 'jobs:jobs' %}" class="btn">Back to Jobs</a>
+    <a href="{% url 'jobs:apply_job' job.pk %}" class="apply-btn">Apply now</a>
+</div>
+{% endblock %}

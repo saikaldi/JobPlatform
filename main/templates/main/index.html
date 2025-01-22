@@ -12,49 +12,54 @@
           <p>
             Thousands of jobs in all the leading sector are waiting for you.
           </p>
-          <form class="d-flex bg-white p-3 rounded shadow-sm">
-            <div class="form-group me-2">
-              <label for="jobTitle" class="d-none">Job Title</label>
-              <div class="input-container">
-                <input
-                  type="text"
-                  class="form-control form-control-sm"
-                  id="jobTitle"
-                  placeholder="Job Title"
-                />
-                <span class="input-icon">
-                  <img
-                    src="/images/icon/fi_search.png"
+          <form method="get" action="{% url 'jobs:search_results' %}" class="d-flex bg-white p-3 rounded shadow-sm">
+    <div class="form-group me-2">
+        <label for="jobTitle" class="d-none">Job Title</label>
+        <div class="input-container">
+            <input
+                type="text"
+                class="form-control form-control-sm"
+                id="jobTitle"
+                name="title"
+                placeholder="Job Title"
+                value="{{ request.GET.title }}"
+            />
+            <span class="input-icon">
+                <img
+                    src="{% static 'images/icon/fi_search.png' %}"
                     alt="Search Icon"
                     width="16"
                     height="16"
-                  />
-                </span>
-              </div>
-            </div>
-            <div class="form-group me-2">
-              <label for="location" class="d-none">Location</label>
-              <div class="input-container">
-                <input
-                  type="text"
-                  class="form-control form-control-sm"
-                  id="location"
-                  placeholder="Location"
                 />
-                <span class="input-icon">
-                  <img
-                    src="/images/icon/fi_map-pin.png"
+            </span>
+        </div>
+    </div>
+    <div class="form-group me-2">
+        <label for="location" class="d-none">Location</label>
+        <div class="input-container">
+            <input
+                type="text"
+                class="form-control form-control-sm"
+                id="location"
+                name="location"
+                placeholder="Location"
+                value="{{ request.GET.location }}"
+            />
+            <span class="input-icon">
+                <img
+                    src="{% static 'images/icon/fi_map-pin.png' %}"
                     alt="Search Icon"
                     width="16"
                     height="16"
-                  />
-                </span>
-              </div>
-            </div>
-            <div class="form-group">
-              <button type="submit" class="btn-search">Find Job</button>
-            </div>
-          </form>
+                />
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn-search">Find Job</button>
+    </div>
+</form>
+
 
           <p>
             Suggestion: UI/UX Designer, Programming, Digital Marketing, Video,
@@ -62,217 +67,119 @@
           </p>
         </div>
         <div class="col-12 col-md-7 d-flex justify-content-end">
-          <img class="content-img" src="./images/content.png" alt="" />
+          <img class="content-img" src="{% static 'images/content.png' %}" alt="" />
         </div>
       </div>
     </div>
 
-    <section class="section-jobs">
-      <div class="container-fluid">
-        <!-- Title and Description -->
-        <h1 class="mt-5 text-center">Featured Jobs</h1>
-        <p class="mb-5 text-center">
-          Choose jobs from the top employers and apply for the same.
-        </p>
 
-        <!-- Cards Section -->
-        <div class="row row-card justify-content-center">
-          <div class="job-card">
+<section class="section-jobs">
+    <h3 class="text-center m-5">All Jobs</h3>
+    <div class="row row-card justify-content-center">
+        {% for job in jobs_page %}
+        <div class="job-card">
             <div class="job-header">
-              <h3 class="job-title">Technical Support Specialist</h3>
-              <img
-                class="saved-icon"
-                src="/images/icon/saved.png"
-                alt="Saved Icon"
-              />
-            </div>
+                <h3 class="job-title">
+                    <a href="{% url 'jobs:job_detail' job.pk %}" class="job-title">{{ job.title }}</a>
+                </h3>
+                {% if user.is_authenticated %}
+                    <button class="btn btn-link">
+                        {% if request.user in job.saved_by.all %}
+                            <a href="{% url 'jobs:save_job' job.pk %}">
+                                <img class="saved-icon" src="{% static 'images/icon/bookmark.png' %}" alt="Saved Icon">
+                            </a>
+                        {% else %}
+                            <a href="{% url 'jobs:save_job' job.pk %}">
+                                <img class="saved-icon" src="{% static 'images/icon/saved.png' %}" alt="Saved Icon">
+                            </a>
+                        {% endif %}
+                    </button>
+                {% else %}
+                    <a href="#" class="btn " onclick="alert('Please log in or register to save jobs.');"><img class="saved-icon" src="{% static 'images/icon/saved.png' %}" alt="Saved Icon"></a>
+                {% endif %}
 
+            </div>
             <div class="job-info">
-              <span class="job-type">PART-TIME</span>
-              <span class="job-salary">Salary: 20,000 INR - 25,000 INR</span>
+                <span class="job-type">{{ job.get_job_type_display }}</span>
+                <span class="job-salary">Salary: {{ job.salary }}$</span>
             </div>
             <div class="company-info">
-              <img
-                src="/images/icon/google1.png"
-                alt="Google Logo"
-                class="company-logo"
-              />
-              <div>
-                <p class="company-name">Google Inc.</p>
-                <p class="company-location">
-                  <span class="location-icon">📍</span> New Delhi, India
-                </p>
-              </div>
+                <img src="{{ job.logo.url }}" alt="{{ job.company }} Logo" class="company-logo">
+                <div>
+                    <p class="company-name">{{ job.company }}</p>
+                    <p class="company-location">
+                        <span class="location-icon">📍</span> {{ job.location }}
+                    </p>
+                </div>
             </div>
             <div class="applicant-info">
-              <div class="applicants">
-                <img
-                  src="/images/icon/applicant1.png"
-                  alt="Applicant 1"
-                  class="applicant-photo"
-                />
-                <img
-                  src="/images/icon/applicant2.png"
-                  alt="Applicant 2"
-                  class="applicant-photo"
-                />
-                <img
-                  src="/images/icon/applicant3.png"
-                  alt="Applicant 3"
-                  class="applicant-photo"
-                />
-              </div>
-              <p class="applicant-count mt-3">10+ applicants</p>
-            </div>
-            <div class="action-buttons">
-              <a href="/view_job_detail.html" class="details-btn btn"
-                >View details</a
-              >
-              <a href="/apply.html" class="apply-btn btn">Apply now</a>
-            </div>
-          </div>
-
-          <div class="job-card">
-            <div class="job-header">
-              <h3 class="job-title">Technical Support Specialist</h3>
-              <img
-                class="saved-icon"
-                src="/images/icon/saved.png"
-                alt="Saved Icon"
-              />
-            </div>
-
-            <div class="job-info">
-              <span class="job-type">PART-TIME</span>
-              <span class="job-salary">Salary: 20,000 INR - 25,000 INR</span>
-            </div>
-            <div class="company-info">
-              <img
-                src="/images/icon/google1.png"
-                alt="Google Logo"
-                class="company-logo"
-              />
-              <div>
-                <p class="company-name">Google Inc.</p>
-                <p class="company-location">
-                  <span class="location-icon">📍</span> New Delhi, India
+                <p class="applicant-count mt-3">
+                    {{ job.applications.count }} applicants
                 </p>
-              </div>
-            </div>
-            <div class="applicant-info">
-              <div class="applicants">
-                <img
-                  src="/images/icon/applicant1.png"
-                  alt="Applicant 1"
-                  class="applicant-photo"
-                />
-                <img
-                  src="/images/icon/applicant2.png"
-                  alt="Applicant 2"
-                  class="applicant-photo"
-                />
-                <img
-                  src="/images/icon/applicant3.png"
-                  alt="Applicant 3"
-                  class="applicant-photo"
-                />
-              </div>
-              <p class="applicant-count mt-3">10+ applicants</p>
             </div>
             <div class="action-buttons">
-              <a href="/view_job_detail.html" class="details-btn btn"
-                >View details</a
-              >
-              <a href="/apply.html" class="apply-btn btn">Apply now</a>
+                <a href="{% url 'jobs:job_detail' job.pk %}" class="details-btn btn">View details</a>
+                <a href="{% url 'jobs:apply_job' job.pk %}" class="apply-btn">Apply now</a>
             </div>
-          </div>
-
-          <div class="job-card">
-            <div class="job-header">
-              <h3 class="job-title">Technical Support Specialist</h3>
-              <img
-                class="saved-icon"
-                src="/images/icon/saved.png"
-                alt="Saved Icon"
-              />
-            </div>
-
-            <div class="job-info">
-              <span class="job-type">PART-TIME</span>
-              <span class="job-salary">Salary: 20,000 INR - 25,000 INR</span>
-            </div>
-            <div class="company-info">
-              <img
-                src="/images/icon/google1.png"
-                alt="Google Logo"
-                class="company-logo"
-              />
-              <div>
-                <p class="company-name">Google Inc.</p>
-                <p class="company-location">
-                  <span class="location-icon">📍</span> New Delhi, India
-                </p>
-              </div>
-            </div>
-            <div class="applicant-info">
-              <div class="applicants">
-                <img
-                  src="/images/icon/applicant1.png"
-                  alt="Applicant 1"
-                  class="applicant-photo"
-                />
-                <img
-                  src="/images/icon/applicant2.png"
-                  alt="Applicant 2"
-                  class="applicant-photo"
-                />
-                <img
-                  src="/images/icon/applicant3.png"
-                  alt="Applicant 3"
-                  class="applicant-photo"
-                />
-              </div>
-              <p class="applicant-count mt-3">10+ applicants</p>
-            </div>
-            <div class="action-buttons">
-              <a href="/view_job_detail.html" class="details-btn btn"
-                >View details</a
-              >
-              <a href="/apply.html" class="apply-btn btn">Apply now</a>
-            </div>
-          </div>
         </div>
-      </div>
-    </section>
+        {% empty %}
+        <p class="text-center">No jobs found.</p>
+        {% endfor %}
+    </div>
+    <div class="text-center mt-5">
+        <nav>
+            <ul class="pagination justify-content-center">
+                {% if jobs_page.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ jobs_page.previous_page_number }}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                {% endif %}
 
-    <!-- View All Link -->
-    <a href="/job_search.html" class="text-center mt-4 view-all-text d-block"
-      >View All</a
-    >
+                {% for num in jobs_page.paginator.page_range %}
+                <li class="page-item {% if jobs_page.number == num %}active{% endif %}">
+                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                </li>
+                {% endfor %}
+
+                {% if jobs_page.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ jobs_page.next_page_number }}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</section>
+
+
 
     <div class="container-fluid mt-5">
       <p class="text-center">Top Companies hiring now</p>
       <hr />
 
       <div class="company-icons d-flex justify-content-center">
-        <a href="#" class="company-icon">
-          <img class="icons" src="./images/icon/google.png" alt="Google" />
+        <a href="https://www.google.com/" class="company-icon">
+          <img class="icons" src="{% static 'images/icon/google.png' %}" alt="Google" />
         </a>
-        <a href="#" class="company-icon">
+        <a href="https://www.microsoft.com/it-it/" class="company-icon">
           <img
             class="icons"
-            src="./images/icon/microsoft.png"
+            src="{% static 'images/icon/microsoft.png' %}"
             alt="Microsoft"
           />
         </a>
-        <a href="#" class="company-icon">
-          <img class="icons" src="./images/icon/flipkart.png" alt="Flipkart" />
+        <a href="https://www.flipkart.com/" class="company-icon">
+          <img class="icons" src="{% static 'images/icon/flipkart.png' %}" alt="Flipkart" />
         </a>
-        <a href="#" class="company-icon">
-          <img class="icons" src="./images/icon/youtube.png" alt="YouTube" />
+        <a href="https://www.youtube.com/jobs/" class="company-icon">
+          <img class="icons" src="{% static 'images/icon/youtube.png' %}" alt="YouTube" />
         </a>
-        <a href="#" class="company-icon">
-          <img class="icons" src="./images/icon/ibm.png" alt="IBM" />
+        <a href="https://www.ibm.com/us-en" class="company-icon">
+          <img class="icons" src="{% static 'images/icon/ibm.png' %}" alt="IBM" />
         </a>
       </div>
     </div>

@@ -4,7 +4,7 @@ from django.contrib import messages
 
 def posts(request):
     if request.method == 'POST':
-        form = JobPostingForm(request.POST)
+        form = JobPostingForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             messages.success(request, "Job posted successfully!")

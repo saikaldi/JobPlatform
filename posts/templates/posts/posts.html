@@ -5,12 +5,57 @@
     <h1 class="text-center">Post a New Job</h1>
     <p class="text-center">Fill out the form below to post a job listing.</p>
 
-    <form class="p-4 bg-white shadow-sm rounded" method="post" action="{% url 'posts:posts' %}">
+    <form class="p-4 bg-white shadow-sm rounded" method="POST" enctype="multipart/form-data" action="{% url 'posts:posts' %}">
         {% csrf_token %}
-        {{ form.as_p }}
+        <div class="mb-3">
+            <label for="jobTitle" class="form-label">Job Title</label>
+            <input type="text" class="form-control" id="jobTitle" name="title" placeholder="Job Title" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="company" class="form-label">Company</label>
+            <input type="text" class="form-control" id="company" name="company" placeholder="Company Name" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="logo" class="form-label">Company Logo</label>
+            <input type="file" class="form-control" id="logo" name="logo" accept="image/*">
+        </div>
+
+        <div class="mb-3">
+            <label for="location" class="form-label">Location</label>
+            <input type="text" class="form-control" id="location" name="location" placeholder="Location" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="jobType" class="form-label">Job Type</label>
+            <select class="form-select" id="jobType" name="job_type" required>
+                <option value="full_time">Full-time</option>
+                <option value="part_time">Part-time</option>
+                <option value="freelance">Freelance</option>
+                <option value="internship">Internship</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="salary" class="form-label">Salary</label>
+            <input type="text" class="form-control" id="salary" name="salary" placeholder="Salary Range" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Job Description</label>
+            <textarea class="form-control" id="description" name="description" rows="4" placeholder="Describe the job" required></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="contactEmail" class="form-label">Contact Email</label>
+            <input type="email" class="form-control" id="contactEmail" name="contact_email" placeholder="Contact Email" required>
+        </div>
+
         <div class="mb-3 text-center">
             <button type="submit" class="btn btn-primary">Post Job</button>
         </div>
     </form>
 </div>
+
 {% endblock %}

@@ -75,3 +75,23 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+
+
+
+
+$(document).ready(function () {
+    var notification = $('#notification');
+    // After 2 seconds, close the notification if it exists
+    if (notification.length > 0) {
+        setTimeout(function () {
+            notification.fadeOut('slow', function () {
+                $(this).remove(); // Remove the element from the DOM
+                console.log("Notification script running...");
+
+            });
+        }, 2000); // 2 seconds
+    }
+});
+
+

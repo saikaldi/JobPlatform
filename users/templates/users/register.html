@@ -16,7 +16,11 @@
             id="first_name"
             name="first_name"
             placeholder="Enter First Name"
+            value="{{ request.POST.first_name|default:'' }}"
           />
+          {% for error in form.first_name.errors %}
+        <small class="text-danger">{{ error }}</small>
+            {% endfor %}
           <small class="text-danger"></small>
         </div>
         <div class="form-group">
@@ -27,8 +31,11 @@
             id="last_name"
             name="last_name"
             placeholder="Enter Last Name"
+            value="{{ form.last_name.value|default:''  }}"
           />
-          <small class="text-danger"></small>
+          {% for error in form.last_name.errors %}
+        <small class="text-danger">{{ error }}</small>
+    {% endfor %}
         </div>
         <div class="form-group">
           <label for="username">Username</label>
@@ -38,8 +45,11 @@
             id="username"
             name="username"
             placeholder="Enter Username"
+            value="{{ form.username.value|default:''  }}"
           />
-          <small class="text-danger"></small>
+          {% for error in form.username.errors %}
+        <small class="text-danger">{{ error }}</small>
+    {% endfor %}
         </div>
 
         <div class="form-group">
@@ -50,6 +60,7 @@
             id="email"
             name="email"
             placeholder="Enter email"
+            value="{{ form.email.value|default:''  }}"
           />
           {% for error in form.email.errors %}
             <small class="text-danger">{{ error }}</small>
@@ -64,8 +75,12 @@
             id="password1"
             name="password1"
             placeholder="Enter password"
+            value="{{ form.password1.value|default:''  }}"
           />
-          <small class="text-danger"></small>
+          {% for error in form.password1.errors %}
+        <small class="text-danger">{{ error }}</small>
+        {% endfor %}
+
         </div>
 
         <div class="form-group">
@@ -76,8 +91,11 @@
             id="password2"
             name="password2"
             placeholder="Confirm password"
+            value="{{ form.password2.value|default:''  }}"
           />
-          <small class="text-danger"></small>
+          {% for error in form.password2.errors %}
+        <small class="text-danger">{{ error }}</small>
+    {% endfor %}
         </div>
 
 

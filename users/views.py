@@ -1,27 +1,35 @@
-from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import AuthenticationForm
-from .forms import UserRegistrationForm, ProfileForm
-from django.shortcuts import render, reverse, redirect
 from django.http import HttpResponseRedirect
-from django.contrib import auth, messages
 from .forms import UserLoginForm, UserRegistrationForm, ProfileForm
+from .models import User
+from django.shortcuts import render, redirect
+from django.contrib import messages, auth
+from django.urls import reverse
+from .forms import UserRegistrationForm
+
 
 def register(request):
     if request.method == 'POST':
         form = UserRegistrationForm(data=request.POST)
+
         if form.is_valid():
-            user=form.save()
+            # Save the user instance
+            user = form.save()
+
+            # Log success in the console
             print(f"User {user.username} successfully created.")
 
-            session_key = request.session.session_key
-
-            user = form.instance
+            # Log the user in automatically after registration
             auth.login(request, user)
 
-            if session_key:
-                messages.success(request, f"{user.username}, You have successfully registered and logged into your account")
-            return HttpResponseRedirect(reverse('main:index'))
+            # Success message
+            messages.success(request, f"{user.username}, you have successfully registered and logged into your account.")
+
+            # Redirect to the home page or another page
+            return redirect('main:index')  # Replace 'main:index' with your desired redirect page
+        else:
+            print(form.errors)
+            messages.error(request, "There was an error with your registration. Please check the form and try again.")
     else:
         form = UserRegistrationForm()
 
@@ -32,19 +40,28 @@ def register(request):
     return render(request, 'users/register.html', context)
 
 
-def login_view(request):  # Avoid using "Login" as the function name
+
+def login_view(request):
     if request.method == 'POST':
         form = UserLoginForm(data=request.POST)
+
+        # Check if the form is valid
         if form.is_valid():
-            username = request.POST['username']
-            password = request.POST['password']
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+
+            # Check if the user exists
+            if not User.objects.filter(username=username).exists():
+                messages.error(request, f"User '{username}' does not exist. Please register.")
+                return redirect(reverse('users:register'))  # Adjust 'users:register' to your registration URL name
+
+            # Authenticate the user
             user = auth.authenticate(username=username, password=password)
             remember_me = request.POST.get('remember_me')
 
-            messages.get_messages(request)
-
             if user:
                 auth.login(request, user)
+
                 if remember_me:
                     # Extend the session duration to 30 days
                     request.session.set_expiry(30 * 24 * 60 * 60)  # 30 days
@@ -54,25 +71,24 @@ def login_view(request):  # Avoid using "Login" as the function name
 
                 messages.success(request, f'{username}, You successfully logged in')
 
+                # Handle the 'next' parameter for redirection
                 redirect_page = request.POST.get('next', None)
-                if redirect_page and redirect_page != reverse('user:logout'):
-                    return HttpResponseRedirect(request.POST.get('next'))
+                if redirect_page and redirect_page != reverse('users:logout'):
+                    return HttpResponseRedirect(redirect_page)
 
                 return HttpResponseRedirect(reverse('main:index'))
         else:
-            # Add error message for invalid credentials
             messages.error(request, 'Invalid username or password. Please try again.')
 
-
     else:
-
         form = UserLoginForm()
 
     context = {
         'title': 'Home - Authentication',
-        'form':form
+        'form': form
     }
     return render(request, 'users/login.html', context)
+
 
 @login_required
 def logout(request):
@@ -80,18 +96,24 @@ def logout(request):
     auth.logout(request)
     return redirect(reverse('main:index'))
 
-# @login_required
+@login_required
 def profile(request):
-    # if request.method == 'POST':
-    #     form = ProfileForm(data=request.POST, instance=request.user, files=request.FILES)
-    #     if form.is_valid():
-    #         form.save()
-    #         messages.success(request, f' Profile successfully updated')
-    #         return HttpResponseRedirect(reverse('user:profile'))
-    # else:
-    #     form = ProfileForm(instance=request.user)
-    # context = {
-    #     'title': 'Home - Cabinet',
-    #     'form': form,
-    # }
-    return render(request, 'users/profile.html')
+    saved_jobs = request.user.saved_jobs.all()
+    if request.method == 'POST':
+        form = ProfileForm(data=request.POST, instance=request.user, files=request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Profile successfully updated.')
+            return redirect('users:profile')
+    else:
+        form = ProfileForm(instance=request.user)
+
+    context = {
+        'title': 'Profile',
+        'form': form,
+        'user': request.user,  # Ensure user data is passed
+        'saved_jobs': saved_jobs,
+    }
+    return render(request, 'users/profile.html', context)
+
+

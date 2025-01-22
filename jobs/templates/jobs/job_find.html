@@ -1,42 +1,56 @@
 {% extends "base.html" %}
 {% load static %}
-{% block content %}
+{% block jobs_section %}
 <section>
         <div class="mx-5 px-5"><h1>Job  Search</h1>
             <p>Search for your desired job matching your skills</p></div>
-        <form class="d-flex bg-white p-3 rounded shadow-sm">
-            <div class="form-group me-2">
-                <label for="jobTitle" class="d-none">Job Title</label>
-                <div class="input-container">
-                  <input
-                    type="text"
-                    class="form-control form-control-sm"
-                    id="jobTitle"
-                    placeholder="Job Title"
-                  />
-                  <span class="input-icon">
-                    <img src="{% static 'images/icon/fi_search.png' %}" alt="Search Icon" width="16" height="16">
-                  </span>
-                </div>
-              </div>
-            <div class="form-group me-2">
-              <label for="location" class="d-none">Location</label>
-              <div class="input-container">
-              <input
+        <form method="get" action="{% url 'jobs:search_results' %}" class="d-flex bg-white p-3 rounded shadow-sm">
+    <div class="form-group me-2">
+        <label for="jobTitle" class="d-none">Job Title</label>
+        <div class="input-container">
+            <input
+                type="text"
+                class="form-control form-control-sm"
+                id="jobTitle"
+                name="title"
+                placeholder="Job Title"
+                value="{{ request.GET.title }}"
+            />
+            <span class="input-icon">
+                <img
+                    src="{% static 'images/icon/fi_search.png' %}"
+                    alt="Search Icon"
+                    width="16"
+                    height="16"
+                />
+            </span>
+        </div>
+    </div>
+    <div class="form-group me-2">
+        <label for="location" class="d-none">Location</label>
+        <div class="input-container">
+            <input
                 type="text"
                 class="form-control form-control-sm"
                 id="location"
+                name="location"
                 placeholder="Location"
-              />
-              <span class="input-icon">
-                <img src="{% static 'images/icon/fi_map-pin.png' %}" alt="Search Icon" width="16" height="16">
-              </span>
-              </div>
-            </div>
-            <div class="form-group">
-              <button type="submit" class=" btn-search">Find Job</button>
-            </div>
-          </form>
+                value="{{ request.GET.location }}"
+            />
+            <span class="input-icon">
+                <img
+                    src="{% static 'images/icon/fi_map-pin.png' %}"
+                    alt="Search Icon"
+                    width="16"
+                    height="16"
+                />
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn-search">Find Job</button>
+    </div>
+</form>
     </section>
     <section class="section-jobs">
     <h3 class="text-center m-5">All Jobs</h3>
@@ -46,7 +60,21 @@
         <div class="job-card">
             <div class="job-header">
                 <h3 class="job-title">{{ job.title }}</h3>
-                <img class="saved-icon" src="{% static 'images/icon/saved.png' %}" alt="Saved Icon">
+                {% if user.is_authenticated %}
+                    <button class="btn btn-link">
+                        {% if request.user in job.saved_by.all %}
+                            <a href="{% url 'jobs:save_job' job.pk %}">
+                                <img class="saved-icon" src="{% static 'images/icon/bookmark.png' %}" alt="Saved Icon">
+                            </a>
+                        {% else %}
+                            <a href="{% url 'jobs:save_job' job.pk %}">
+                                <img class="saved-icon" src="{% static 'images/icon/saved.png' %}" alt="Saved Icon">
+                            </a>
+                        {% endif %}
+                    </button>
+                {% else %}
+                    <a href="#" class="btn " onclick="alert('Please log in or register to save jobs.');"><img class="saved-icon" src="{% static 'images/icon/saved.png' %}" alt="Saved Icon"></a>
+                {% endif %}
             </div>
 
             <div class="job-info">
@@ -54,7 +82,7 @@
                 <span class="job-salary">Salary: {{ job.salary }}$</span>
             </div>
             <div class="company-info">
-                <img src="#" alt="{{ job.company }} Logo" class="company-logo">
+                <img src="{{ job.logo.url }}" alt="{{ job.company }} Logo" class="company-logo">
                 <div>
                     <p class="company-name">{{ job.company }}</p>
                     <p class="company-location">
@@ -62,9 +90,25 @@
                     </p>
                 </div>
             </div>
+            <div class="applicant-info">
+                <div class="applicants">
+                    <p class="applicant-count mt-3">
+                        {{ job.applications.count }} applicants
+                    </p>
+                </div>
+            </div>
+
+
             <div class="action-buttons">
-                <button class="details-btn">View details</button>
-                <button class="apply-btn">Apply now</button>
+                <a href="{% url 'jobs:job_detail' job.pk %}" class="details-btn btn">View details</a>
+                {% if user.is_authenticated %}
+                <a href="{% url 'jobs:apply_job' job.pk %}" class="apply-btn">Apply now</a>
+                {% else %}
+                    <a href="#" class="apply-btn" onclick="alert('Please log in or register to apply.');">Apply now</a>
+                {% endif %}
+
+
+
             </div>
         </div>
         {% empty %}
