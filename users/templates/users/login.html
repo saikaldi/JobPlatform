@@ -10,7 +10,7 @@
         <p>Welcome back! Select the below login methods.</p>
 
 
-        <form method="POST" action="{% url 'users:login' %}">
+        <form method="POST" action="{% url 'users:login' %}" id="loginForm">
         {% csrf_token %}
 
             <div class="form-group">

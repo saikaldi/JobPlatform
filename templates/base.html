@@ -1,6 +1,4 @@
 {% load static %}
-
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -24,8 +22,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{% static 'js/script.js' %}"></script>
 
 
 
@@ -65,7 +61,7 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url "posts:posts" %}">Post Job</a>
+              <a class="nav-link active" href="{% url "posts:posts" %}">Post Job</a>
             </li>
             {% if user.is_authenticated %}
             <li class="nav-item">
@@ -163,24 +159,10 @@
       </div>
     </footer>
 
-    <!-- Modal Structure -->
-    <div id="contact-modal" class="modal">
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Contact Us</h2>
-        <form action="/submit-contact" method="POST">
-          <label for="name">Name:</label>
-          <input type="text" id="name" name="name" required />
 
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="email" required />
 
-          <label for="message">Message:</label>
-          <textarea id="message" name="message" required></textarea>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
 
-          <button type="submit" class="btn btn-search">Submit</button>
-        </form>
-      </div>
-    </div>
   </body>
 </html>

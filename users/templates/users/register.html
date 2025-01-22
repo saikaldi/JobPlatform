@@ -6,7 +6,7 @@
     <div class="container-fluid ml-1 login-form">
       <h2>Register Your Account</h2>
       <p>Welcome! Fill out the form below to create your account.</p>
-      <form autocomplete="on" action="{% url "users:register" %}" method="post">
+      <form autocomplete="on" action="{% url "users:register" %}" method="post" id="registrationForm">
       {% csrf_token %}
         <div class="form-group">
           <label for="first_name">First Name</label>
